@@ -48,14 +48,15 @@ public static class DatabaseSeeder
         // === USUÁRIOS ===
         var usuarios = new List<Usuario>
         {
-            new() { Id = 1, Nome = "Maria Silva", Email = "maria.silva@email.com", Telefone = "(11) 98765-4321", DataCadastro = new DateTime(2024, 1, 15) },
-            new() { Id = 2, Nome = "João Santos", Email = "joao.santos@email.com", Telefone = "(21) 97654-3210", DataCadastro = new DateTime(2024, 2, 20) },
-            new() { Id = 3, Nome = "Ana Oliveira", Email = "ana.oliveira@email.com", Telefone = "(31) 96543-2109", DataCadastro = new DateTime(2024, 3, 10) },
-            new() { Id = 4, Nome = "Carlos Pereira", Email = "carlos.pereira@email.com", Telefone = "(41) 95432-1098", DataCadastro = new DateTime(2024, 4, 5) }
+            new() { Id = 1, Nome = "Maria Silva", Email = "maria.silva@email.com", Telefone = "(11) 98765-4321", DataCadastro = new DateOnly(2024, 1, 15) },
+            new() { Id = 2, Nome = "João Santos", Email = "joao.santos@email.com", Telefone = "(21) 97654-3210", DataCadastro = new DateOnly(2024, 2, 20) },
+            new() { Id = 3, Nome = "Ana Oliveira", Email = "ana.oliveira@email.com", Telefone = "(31) 96543-2109", DataCadastro = new DateOnly(2024, 3, 10) },
+            new() { Id = 4, Nome = "Carlos Pereira", Email = "carlos.pereira@email.com", Telefone = "(41) 95432-1098", DataCadastro = new DateOnly(2024, 4, 5) }
         };
         context.Usuarios.AddRange(usuarios);
 
         // === EMPRÉSTIMOS ===
+        var hoje = DateOnly.FromDateTime(DateTime.Now);
         var emprestimos = new List<Emprestimo>
         {
             // Empréstimo ativo - Maria pegou Dom Casmurro
@@ -64,8 +65,8 @@ public static class DatabaseSeeder
                 Id = 1, 
                 LivroId = 1, 
                 UsuarioId = 1, 
-                DataEmprestimo = DateTime.Now.AddDays(-5), 
-                DataDevolucaoPrevista = DateTime.Now.AddDays(9), 
+                DataEmprestimo = hoje.AddDays(-5), 
+                DataDevolucaoPrevista = hoje.AddDays(9), 
                 DataDevolucaoReal = null, 
                 Status = EmprestimoStatus.Ativo 
             },
@@ -75,9 +76,9 @@ public static class DatabaseSeeder
                 Id = 2, 
                 LivroId = 3, 
                 UsuarioId = 2, 
-                DataEmprestimo = DateTime.Now.AddDays(-20), 
-                DataDevolucaoPrevista = DateTime.Now.AddDays(-6), 
-                DataDevolucaoReal = DateTime.Now.AddDays(-7), 
+                DataEmprestimo = hoje.AddDays(-20), 
+                DataDevolucaoPrevista = hoje.AddDays(-6), 
+                DataDevolucaoReal = hoje.AddDays(-7), 
                 Status = EmprestimoStatus.Devolvido 
             },
             // Empréstimo ativo - Ana pegou Capitães da Areia
@@ -86,8 +87,8 @@ public static class DatabaseSeeder
                 Id = 3, 
                 LivroId = 5, 
                 UsuarioId = 3, 
-                DataEmprestimo = DateTime.Now.AddDays(-3), 
-                DataDevolucaoPrevista = DateTime.Now.AddDays(11), 
+                DataEmprestimo = hoje.AddDays(-3), 
+                DataDevolucaoPrevista = hoje.AddDays(11), 
                 DataDevolucaoReal = null, 
                 Status = EmprestimoStatus.Ativo 
             },
@@ -97,8 +98,8 @@ public static class DatabaseSeeder
                 Id = 4, 
                 LivroId = 7, 
                 UsuarioId = 4, 
-                DataEmprestimo = DateTime.Now.AddDays(-25), 
-                DataDevolucaoPrevista = DateTime.Now.AddDays(-11), 
+                DataEmprestimo = hoje.AddDays(-25), 
+                DataDevolucaoPrevista = hoje.AddDays(-11), 
                 DataDevolucaoReal = null, 
                 Status = EmprestimoStatus.Atrasado 
             }
@@ -114,7 +115,7 @@ public static class DatabaseSeeder
                 Id = 1, 
                 LivroId = 1, 
                 UsuarioId = 2, 
-                DataReserva = DateTime.Now.AddDays(-2), 
+                DataReserva = hoje.AddDays(-2), 
                 Status = ReservaStatus.Ativa 
             },
             // Reserva ativa - Maria quer Gabriela, Cravo e Canela
@@ -123,7 +124,7 @@ public static class DatabaseSeeder
                 Id = 2, 
                 LivroId = 6, 
                 UsuarioId = 1, 
-                DataReserva = DateTime.Now.AddDays(-1), 
+                DataReserva = hoje.AddDays(-1), 
                 Status = ReservaStatus.Ativa 
             },
             // Reserva atendida - Ana reservou O Alquimista e foi atendida
@@ -132,7 +133,7 @@ public static class DatabaseSeeder
                 Id = 3, 
                 LivroId = 7, 
                 UsuarioId = 3, 
-                DataReserva = DateTime.Now.AddDays(-10), 
+                DataReserva = hoje.AddDays(-10), 
                 Status = ReservaStatus.Atendida 
             }
         };
